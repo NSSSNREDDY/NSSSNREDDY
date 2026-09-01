@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siva Sri Satya Narayana Reddy Nallamilli — Design Verification Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1417;
+    --panel:#161D22;
+    --panel-2:#1B2329;
+    --line:#2A3339;
+    --text:#EDEFF1;
+    --muted:#8B98A1;
+    --amber:#E8A33D;
+    --teal:#5FB3B3;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--amber); color:#12100b;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,20,23,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:var(--font-display); font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber);}
+  .navlinks{display:flex; gap:28px; font-size:14px; color:var(--muted);}
+  .navlinks a{transition:color .15s;}
+  .navlinks a:hover{color:var(--text);}
+  .nav-cta{
+    font-family:var(--font-mono); font-size:13px;
+    border:1px solid var(--line); padding:8px 14px; border-radius:2px;
+    color:var(--teal);
+    transition:border-color .15s, color .15s;
+  }
+  .nav-cta:hover{border-color:var(--teal);}
+  .menu-btn{display:none; background:none; border:none; color:var(--text); font-size:22px;}
+
+  @media (max-width:760px){
+    .navlinks{
+      position:fixed; top:64px; left:0; right:0; bottom:0;
+      background:var(--bg);
+      flex-direction:column; padding:32px 28px; gap:22px;
+      font-size:18px;
+      transform:translateY(-8px);
+      opacity:0; pointer-events:none;
+      transition:opacity .18s, transform .18s;
+    }
+    .navlinks.open{opacity:1; pointer-events:auto; transform:translateY(0);}
+    .nav-cta{display:none;}
+    .menu-btn{display:block;}
+  }
+
+  /* HERO */
+  .hero{padding:88px 0 72px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:56px; align-items:center;}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;} .hero{padding:56px 0 48px;}}
+
+  .kicker{
+    font-family:var(--font-mono); font-size:13px; color:var(--teal);
+    margin-bottom:18px;
+  }
+  h1.name{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(32px,4.4vw,50px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  .role-line{
+    font-family:var(--font-mono);
+    color:var(--amber);
+    font-size:16px;
+    margin-bottom:22px;
+  }
+  .summary{color:var(--muted); font-size:16px; max-width:52ch; margin-bottom:30px;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:34px;}
+  .btn{
+    font-family:var(--font-body); font-weight:500; font-size:14px;
+    padding:12px 20px; border-radius:2px;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--amber); color:#151107;}
+  .btn-secondary{border:1px solid var(--line); color:var(--text);}
+  .btn-secondary:hover{border-color:var(--teal); color:var(--teal);}
+  .btn-primary:hover{filter:brightness(1.08);}
+
+  .contact-strip{display:flex; flex-wrap:wrap; gap:20px; font-size:13px; color:var(--muted); font-family:var(--font-mono);}
+  .contact-strip a:hover{color:var(--teal);}
+
+  /* WAVEFORM VISUAL */
+  .scope{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px 20px 18px;
+  }
+  .scope-head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--font-mono); font-size:11px; color:var(--muted);
+    margin-bottom:14px;
+  }
+  .scope-head .status{color:var(--teal); display:flex; align-items:center; gap:6px;}
+  .scope-head .status::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); box-shadow:0 0 6px var(--teal);}
+  .wave-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .wave-label{font-family:var(--font-mono); font-size:11px; color:var(--muted); width:52px; flex-shrink:0; text-align:right;}
+  .wave-path{stroke-dasharray:600; stroke-dashoffset:600; animation:draw 1.8s ease-out forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .scope-foot{
+    margin-top:16px; padding-top:14px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; color:var(--muted);
+  }
+  .scope-foot .pass{color:var(--amber); font-weight:600;}
+
+  /* SECTION shell */
+  section{padding:76px 0; border-bottom:1px solid var(--line);}
+  .sec-head{margin-bottom:40px;}
+  .sec-label{font-family:var(--font-mono); font-size:13px; color:var(--teal); margin-bottom:8px;}
+  h2{font-family:var(--font-display); font-weight:600; font-size:clamp(24px,3vw,32px); letter-spacing:-0.01em;}
+  .sec-sub{color:var(--muted); font-size:15px; max-width:60ch; margin-top:10px;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.5fr 1fr; gap:48px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--muted); margin-bottom:16px; font-size:15px; max-width:62ch;}
+  .about-grid strong{color:var(--text); font-weight:600;}
+  .info-panel{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:22px 24px;
+    align-self:start;
+  }
+  .info-panel h3{font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-bottom:14px; font-weight:500;}
+  .info-row{display:flex; justify-content:space-between; gap:12px; font-size:13.5px; padding:8px 0; border-bottom:1px solid var(--line);}
+  .info-row:last-child{border-bottom:none;}
+  .info-row span:first-child{color:var(--muted);}
+  .info-row span:last-child{text-align:right; font-family:var(--font-mono); font-size:12.5px;}
+
+  /* EXPERIENCE */
+  .job{
+    display:grid; grid-template-columns:190px 1fr; gap:32px;
+    padding:28px 0; border-top:1px solid var(--line);
+  }
+  .job:first-of-type{border-top:none;}
+  @media (max-width:700px){.job{grid-template-columns:1fr; gap:8px;}}
+  .job-when{font-family:var(--font-mono); font-size:13px; color:var(--muted);}
+  .job-title{font-family:var(--font-display); font-weight:600; font-size:19px; margin-bottom:2px;}
+  .job-org{color:var(--amber); font-size:14px; margin-bottom:14px;}
+  .job ul{list-style:none;}
+  .job li{position:relative; padding-left:18px; margin-bottom:9px; color:var(--muted); font-size:14.5px; max-width:64ch;}
+  .job li::before{content:'▸'; position:absolute; left:0; color:var(--teal); font-size:12px; top:2px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .tag{
+    font-family:var(--font-mono); font-size:11.5px; color:var(--muted);
+    border:1px solid var(--line); padding:4px 10px; border-radius:20px;
+  }
+
+  /* PROJECTS timeline */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line);}
+  .tl-item{position:relative; padding-bottom:38px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-28px; top:5px; width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--teal);
+  }
+  .tl-item.current::before{background:var(--amber); border-color:var(--amber); box-shadow:0 0 0 4px rgba(232,163,61,0.15);}
+  .tl-when{font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-bottom:6px;}
+  .tl-title{font-family:var(--font-display); font-weight:600; font-size:18px; margin-bottom:6px;}
+  .tl-proto{font-family:var(--font-mono); font-size:12px; color:var(--amber); margin-bottom:10px;}
+  .tl-desc{color:var(--muted); font-size:14.5px; max-width:66ch; margin-bottom:12px;}
+  .tl-item .tag-row{margin-top:0;}
+  .extra-note{
+    margin-top:36px; padding:18px 20px; border:1px dashed var(--line); border-radius:4px;
+    color:var(--muted); font-size:14px;
+  }
+  .extra-note strong{color:var(--text);}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-cat{background:var(--bg); padding:26px 28px;}
+  .skill-cat h3{font-family:var(--font-mono); font-size:12.5px; color:var(--teal); margin-bottom:14px;}
+  .skill-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-chip{
+    font-size:13px; padding:6px 12px; border:1px solid var(--line); border-radius:2px; color:var(--text);
+    background:var(--panel);
+  }
+
+  /* EDUCATION */
+  table{width:100%; border-collapse:collapse; font-size:14.5px;}
+  th{
+    text-align:left; font-family:var(--font-mono); font-weight:500; font-size:12px; color:var(--muted);
+    padding:10px 14px; border-bottom:1px solid var(--line);
+  }
+  td{padding:16px 14px; border-bottom:1px solid var(--line); color:var(--muted);}
+  td:first-child{color:var(--text);}
+  td:last-child, th:last-child{text-align:right; font-family:var(--font-mono); color:var(--amber);}
+
+  /* CONTACT */
+  .contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:40px;}
+  @media (max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-card{background:var(--bg); padding:26px 24px;}
+  .contact-card h3{font-family:var(--font-mono); font-size:11.5px; color:var(--muted); margin-bottom:10px;}
+  .contact-card a{font-size:15px; word-break:break-word;}
+  .contact-card a:hover{color:var(--teal);}
+
+  footer{padding:32px 0; text-align:center; color:var(--muted); font-size:13px; font-family:var(--font-mono);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand"><span class="dot"></span>S.S.S.N. Reddy</div>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="Nallamilli_Siva_Sri_Satya_Narayana_Reddy_Resume.pdf" download>Download resume</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">Design Verification Engineer</div>
+      <h1 class="name">Nallamilli Siva Sri<br>Satya Narayana Reddy</h1>
+      <div class="role-line">SystemVerilog · UVM · AMBA · MIPI · RISC-V</div>
+      <p class="summary">Three years verifying digital designs and building coverage-driven UVM testbenches — from AMBA bus protocols to MIPI camera and display interfaces to a RISC-V processor core. Came into VLSI from a mechanical engineering background, and now spends most days chasing mismatches through waveforms until the scoreboard reports clean.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">See verification projects</a>
+        <a class="btn btn-secondary" href="#contact">Get in touch</a>
+      </div>
+      <div class="contact-strip">
+        <a href="mailto:sivareddy.nallamilli1881@gmail.com">sivareddy.nallamilli1881@gmail.com</a>
+        <a href="tel:+917386258402">+91 73862 58402</a>
+        <a href="https://linkedin.com/in/sivasrisatyanarayanareddynallamilli" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="scope">
+      <div class="scope-head">
+        <span>tb_top.sv — waveform</span>
+        <span class="status">running</span>
+      </div>
+      <svg viewBox="0 0 340 150" width="100%" height="auto">
+        <g class="wave-row" transform="translate(0,0)"></g>
+      </svg>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="wave-row">
+          <span class="wave-label">CLK</span>
+          <svg viewBox="0 0 280 24" width="100%" height="24" preserveAspectRatio="none">
+            <path class="wave-path" d="M0,18 L0,6 L20,6 L20,18 L40,18 L40,6 L60,6 L60,18 L80,18 L80,6 L100,6 L100,18 L120,18 L120,6 L140,6 L140,18 L160,18 L160,6 L180,6 L180,18 L200,18 L200,6 L220,6 L220,18 L240,18 L240,6 L260,6 L260,18 L280,18" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="wave-row">
+          <span class="wave-label">VALID</span>
+          <svg viewBox="0 0 280 24" width="100%" height="24" preserveAspectRatio="none">
+            <path class="wave-path" d="M0,18 L60,18 L60,6 L200,6 L200,18 L280,18" fill="none" stroke="var(--teal)" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div class="wave-row">
+          <span class="wave-label">READY</span>
+          <svg viewBox="0 0 280 24" width="100%" height="24" preserveAspectRatio="none">
+            <path class="wave-path" d="M0,18 L90,18 L90,6 L280,6" fill="none" stroke="var(--teal)" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div class="wave-row">
+          <span class="wave-label">DATA</span>
+          <svg viewBox="0 0 280 24" width="100%" height="24" preserveAspectRatio="none">
+            <path class="wave-path" d="M0,12 L90,12 L100,4 L180,4 L190,20 L270,20 L280,12" fill="none" stroke="var(--amber)" stroke-width="1.8"/>
+          </svg>
+        </div>
+      </div>
+      <div class="scope-foot">
+        <span>coverage: 98.4%</span>
+        <span class="pass">scoreboard: PASS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="sec-head">
+        <div class="sec-label">about</div>
+        <h2>From mechanical drawings to digital waveforms</h2>
+      </div>
+      <p>I started in <strong>mechanical engineering</strong> — B.Tech from VIT, specializing in automotive systems — before moving into VLSI verification. That background shows up in how I work: I still think in terms of tolerances, edge cases, and what happens when a system is pushed outside its intended envelope, just applied to registers and bus transactions instead of parts and assemblies.</p>
+      <p>Since 2023 I've been building <strong>SystemVerilog and UVM</strong> testbenches at PRS Semicon Technologies, verifying <strong>AMBA protocols</strong> (AXI, AHB, APB), <strong>MIPI</strong> camera and display interfaces (CSI/DSI), and most recently a <strong>RISC-V processor core</strong>. The common thread across all of it is the same loop: write the environment, drive constrained-random and directed stimulus, watch the scoreboard, and dig into waveforms when it disagrees with the reference model.</p>
+      <p>I'm looking for design verification roles where I can keep going deeper on protocol-level and processor-level verification, and pick up new architectures along the way.</p>
+    </div>
+    <div class="info-panel">
+      <h3>quick info</h3>
+      <div class="info-row"><span>Experience</span><span>3 years</span></div>
+      <div class="info-row"><span>Current role</span><span>DV Engineer</span></div>
+      <div class="info-row"><span>Core stack</span><span>SV / UVM</span></div>
+      <div class="info-row"><span>Protocols</span><span>AXI, AHB, APB</span></div>
+      <div class="info-row"><span>Interfaces</span><span>MIPI CSI/DSI</span></div>
+      <div class="info-row"><span>Processor work</span><span>RISC-V</span></div>
+      <div class="info-row"><span>EDA tools</span><span>Xcelium</span></div>
+      <div class="info-row"><span>Based in</span><span>India</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">experience</div>
+      <h2>Where the testbenches got built</h2>
+    </div>
+
+    <div class="job">
+      <div class="job-when">Jun 2024 — Present</div>
+      <div>
+        <div class="job-title">Design Verification Engineer</div>
+        <div class="job-org">PRS Semicon Technologies</div>
+        <ul>
+          <li>Developed SystemVerilog/UVM testbenches for a RISC-V processor core, covering instruction decode, ALU operations, memory access, and control-flow.</li>
+          <li>Verified MIPI DSI TX/RX and CSI RX/TX modules end to end — packet structure, lane configuration, HS/LP timing, and CRC/ECC checks.</li>
+          <li>Built reusable UVM components (driver, monitor, sequencer, scoreboard) and reference models to check expected versus actual behavior.</li>
+          <li>Debugged instruction-level and protocol-level mismatches through waveform analysis, tracing issues back to root cause.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">SystemVerilog</span><span class="tag">UVM</span><span class="tag">RISC-V</span><span class="tag">MIPI CSI/DSI</span><span class="tag">Xcelium</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-when">Jun 2023 — Jun 2024</div>
+      <div>
+        <div class="job-title">Design Verification Intern</div>
+        <div class="job-org">PRS Group</div>
+        <ul>
+          <li>Built testbenches for AMBA APB, AHB, and AXI4-Lite slave modules, covering handshake timing, burst types, and response handling.</li>
+          <li>Wrote directed and constrained-random test cases and tracked functional coverage against verification plans.</li>
+          <li>Verified control signals and protocol compliance (PSEL/PENABLE, HTRANS/HBURST, VALID/READY) across each bus.</li>
+          <li>Contributed to design reviews, weekly status reporting, and cross-functional collaboration with the RTL team.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">AMBA APB</span><span class="tag">AMBA AHB</span><span class="tag">AXI4-Lite</span><span class="tag">SVA</span><span class="tag">SimVision</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">projects</div>
+      <h2>Verification work, most recent first</h2>
+      <p class="sec-sub">Each project below followed the same shape — UVM environment, reference model, coverage plan, waveform debug — applied to a different protocol or core.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item current">
+        <div class="tl-when">Feb 2026 — Present</div>
+        <div class="tl-title">RISC-V Processor Verification</div>
+        <div class="tl-proto">RISC-V ISA · SystemVerilog/UVM</div>
+        <p class="tl-desc">Functional verification of a RISC-V core's instruction decoding, ALU operations, memory access, and control-flow, checked against a reference model built alongside the testbench.</p>
+        <div class="tag-row">
+          <span class="tag">Driver/Monitor/Scoreboard</span><span class="tag">Branch & jump coverage</span><span class="tag">Waveform debug</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Mar 2025 — Jan 2026</div>
+        <div class="tl-title">Display Serial Interface (MIPI DSI TX/RX)</div>
+        <div class="tl-proto">MIPI DSI</div>
+        <p class="tl-desc">Verified high-speed data transmission between host and display — short/long packet structure, HS/LP mode transitions, 1–4 lane configuration, and ECC/CRC validation.</p>
+        <div class="tag-row">
+          <span class="tag">Command & video modes</span><span class="tag">Lane sync</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Jun 2024 — Mar 2025</div>
+        <div class="tl-title">Camera Serial Interface (MIPI CSI RX/TX)</div>
+        <div class="tl-proto">MIPI CSI</div>
+        <p class="tl-desc">Verified packet decoding and multi-lane data transmission between a camera sensor and receiver, including data-type and virtual-channel handling under directed and constrained-random tests.</p>
+        <div class="tag-row">
+          <span class="tag">Header/ECC/CRC checks</span><span class="tag">Multi-lane sync</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Feb 2024 — Jun 2024</div>
+        <div class="tl-title">AMBA AXI4-Lite Protocol Verification</div>
+        <div class="tl-proto">AMBA AXI4-Lite</div>
+        <p class="tl-desc">Verified an AXI4-Lite slave's read/write transactions across independent AW, W, B, AR, and R channels, with full VALID/READY handshake and response-code checking.</p>
+        <div class="tag-row">
+          <span class="tag">BRESP/RRESP</span><span class="tag">Register access</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Oct 2023 — Feb 2024</div>
+        <div class="tl-title">AMBA AHB Protocol Verification</div>
+        <div class="tl-proto">AMBA AHB</div>
+        <p class="tl-desc">Verified pipelined address/data transfers on an AHB slave — transfer types, burst types, and HREADY/HRESP behavior across the protocol's timing states.</p>
+        <div class="tag-row">
+          <span class="tag">Burst types</span><span class="tag">Pipeline timing</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Jun 2023 — Oct 2023</div>
+        <div class="tl-title">AMBA APB Protocol Verification</div>
+        <div class="tl-proto">AMBA APB</div>
+        <p class="tl-desc">Verified an APB slave's SETUP/ENABLE phase timing, address decoding, and read/write operations, including PRDATA and PSLVERR response handling.</p>
+        <div class="tag-row">
+          <span class="tag">Setup/Access timing</span><span class="tag">First DV project</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="extra-note">
+      <strong>Also on the bench:</strong> SoC-level verification of an AXI-based system in UVM, extending the AXI4-Lite environment to system-level integration scenarios.
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">skills</div>
+      <h2>What's in the verification toolbox</h2>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3>verification languages & methodology</h3>
+        <div class="skill-list">
+          <span class="skill-chip">SystemVerilog</span><span class="skill-chip">Verilog</span><span class="skill-chip">UVM</span>
+          <span class="skill-chip">Coverage-driven verification</span><span class="skill-chip">Constrained-random</span><span class="skill-chip">SVA</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>protocols & architectures</h3>
+        <div class="skill-list">
+          <span class="skill-chip">AMBA AXI</span><span class="skill-chip">AMBA AHB</span><span class="skill-chip">AMBA APB</span>
+          <span class="skill-chip">MIPI CSI</span><span class="skill-chip">MIPI DSI</span><span class="skill-chip">RISC-V</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>tools & debug</h3>
+        <div class="skill-list">
+          <span class="skill-chip">Cadence Xcelium</span><span class="skill-chip">SimVision</span><span class="skill-chip">Waveform analysis</span>
+          <span class="skill-chip">Root cause analysis</span><span class="skill-chip">TCL</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>languages & other tools</h3>
+        <div class="skill-list">
+          <span class="skill-chip">Python</span><span class="skill-chip">C</span><span class="skill-chip">C++</span><span class="skill-chip">MATLAB</span>
+          <span class="skill-chip">EDA Playground</span><span class="skill-chip">AutoCAD</span><span class="skill-chip">SolidWorks</span><span class="skill-chip">ANSYS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">education</div>
+      <h2>Academic background</h2>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Course / degree</th><th>Institution</th><th>Year</th><th>Score</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>B.Tech, Mechanical Engineering (Automotive Engineering)</td>
+          <td>Vellore Institute of Technology, Vellore</td>
+          <td>2019</td>
+          <td>7.81 CGPA</td>
+        </tr>
+        <tr>
+          <td>XII (Intermediate)</td>
+          <td>Narayana Junior College, Vijayawada</td>
+          <td>2017</td>
+          <td>6.0</td>
+        </tr>
+        <tr>
+          <td>X (SSC)</td>
+          <td>Narayana E-Techno School, Anaparthi</td>
+          <td>2016</td>
+          <td>8.8</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">contact</div>
+      <h2>Let's talk verification</h2>
+      <p class="sec-sub">Open to design verification roles where I can keep working across protocols and processor cores. Reach out directly, or download the full resume below.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>email</h3>
+        <a href="mailto:sivareddy.nallamilli1881@gmail.com">sivareddy.nallamilli1881@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <h3>phone</h3>
+        <a href="tel:+917386258402">+91 73862 58402</a>
+      </div>
+      <div class="contact-card">
+        <h3>linkedin</h3>
+        <a href="https://linkedin.com/in/sivasrisatyanarayanareddynallamilli" target="_blank" rel="noopener">sivasrisatyanarayanareddynallamilli</a>
+      </div>
+    </div>
+    <a class="btn btn-primary" href="Nallamilli_Siva_Sri_Satya_Narayana_Reddy_Resume.pdf" download>Download full resume</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Nallamilli Siva Sri Satya Narayana Reddy — built as a static site
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navlinks = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', () => {
+    navlinks.classList.toggle('open');
+  });
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
